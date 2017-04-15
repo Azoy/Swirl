@@ -75,9 +75,6 @@ public final class Swirl {
       case .map:
         return self.createMap()
 
-      case .atomUTF:
-        
-
       default:
         throw ParseError.decoding(message: "sup")
     }
