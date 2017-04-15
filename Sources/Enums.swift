@@ -6,8 +6,9 @@
 //  Copyright © 2017 Alejandro Alonso. All rights reserved.
 //
 
-public extension Swirl {
+extension Swirl {
 
+  /// Acceptable ETF Terms that can be used
   enum Term: UInt8 {
     case float = 70
     case smallInt = 97
@@ -23,7 +24,8 @@ public extension Swirl {
     case smallAtomUTF
   }
 
-  enum ParseError: Error {
+  /// Error from either encoding or decoding a byte array
+  public enum ParseError: Error {
     case decoding(message: String), encoding(message: String)
   }
 

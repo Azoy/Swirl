@@ -8,11 +8,22 @@
 
 public final class Swirl {
 
+  // MARK: Properties
+
+  /// Used to keep a state of the bytes
   static var bytes: [UInt8] = []
 
+  /// ETF protocol version
   static let version: UInt8 = 131
 
-  public static func unpack(_ bytes: [UInt8]) throws -> Any? {
+  // MARK: Functions
+
+  /**
+   Unpacks a byte array to Swift types hidden in Any
+
+   - parameter bytes: Byte array to unpack
+  */
+  public static func unpack(_ bytes: [UInt8]) throws -> Any {
     self.bytes = bytes
     let version = self.bytes.shift(by: 1)
 
@@ -31,6 +42,7 @@ public final class Swirl {
     }
   }
 
+  /// Gets current byte state and trys to convert first term to a type
   static func decode() throws -> Any {
     guard let tag = Term(rawValue: self.bytes.shift(by: 1)[0]) else {
       throw ParseError.decoding(message: "Unsupported term encountered")
@@ -80,6 +92,7 @@ public final class Swirl {
     }
   }
 
+  /// Creates an array of any types
   static func createList() -> [Any] {
     let length = Int(bytes: Array(self.bytes.shift(by: 4)))
     var array = [Any]()
@@ -93,6 +106,7 @@ public final class Swirl {
     return array
   }
 
+  /// Creates a dictionary using AnyHashable and Any and Key => Value
   static func createMap() -> [AnyHashable: Any] {
     let length = Int(bytes: Array(self.bytes.shift(by: 4)))
     var dictionary = [AnyHashable: Any]()
