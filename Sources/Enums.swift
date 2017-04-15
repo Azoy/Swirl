@@ -9,18 +9,14 @@
 public extension Swirl {
 
   enum Term: UInt8 {
+    case float = 70
     case smallInt = 97
     case int
-    case float
-    case atom
-    case smallTuple = 104
-    case largeTuple
-    case nilObject
+    case atom = 100
+    case nilObject = 106
     case string
     case list
     case binary
-    case smallBig
-    case largeBig
     case smallAtom = 115
     case map
     case atomUTF = 118
